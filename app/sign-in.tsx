@@ -1,36 +1,47 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import images from "@/constants/images";
-import icons from "@/constants/icons";
-import { login } from "@/lib/appwrite";
+import {
+  Alert,
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-const SignIn = () => {
+import { login } from "@/lib/appwrite";
+import { Redirect } from "expo-router";
+import { useGlobalContext } from "@/lib/global-provider";
+import icons from "@/constants/icons";
+import images from "@/constants/images";
+
+const Auth = () => {
+  const { refetch, loading, isLogged } = useGlobalContext();
+  // se l' utente e loggato lo rimanda alla /
+  if (!loading && isLogged) return <Redirect href="/" />;
+
   const handleLogin = async () => {
     const result = await login();
     if (result) {
-      console.log("Login success");
+      refetch();
     } else {
-      Alert.alert("Login failed");
+      Alert.alert("Error", "Failed to login");
     }
   };
+
   return (
-    // La SafeAreaView serve a visualizzare in modo sicuro il contenuto in modo che si adatti a qualsiasi tipo di schermo
     <SafeAreaView className="bg-white h-full">
-      {/* ScrollView serve a visualizzare il contenuto in modo scorrevole */}
-      <ScrollView contentContainerClassName="h-full">
+      <ScrollView
+        contentContainerStyle={{
+          height: "100%",
+        }}
+      >
         <Image
           source={images.onboarding}
           className="w-full h-4/6"
           resizeMode="contain"
         />
+
         <View className="px-10">
           <Text className="text-base text-center uppercase font-rubik text-black-200">
             Welcome To Real Scout
@@ -66,4 +77,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Auth;
