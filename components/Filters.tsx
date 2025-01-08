@@ -5,18 +5,20 @@ import { Text, ScrollView, TouchableOpacity } from "react-native";
 import { categories } from "@/constants/data";
 
 const Filters = () => {
+  //
   const params = useLocalSearchParams<{ filter?: string }>();
   const [selectedCategory, setSelectedCategory] = useState(
     params.filter || "All"
   );
 
   const handleCategoryPress = (category: string) => {
+    // se si ripreme su una categoria allora rimanda a tutti
     if (selectedCategory === category) {
-      setSelectedCategory("");
-      router.setParams({ filter: "" });
+      setSelectedCategory("All");
+      router.setParams({ filter: "All" });
       return;
     }
-
+    // quando si clicca su una categoria setto lo stato e anche nei Params
     setSelectedCategory(category);
     router.setParams({ filter: category });
   };
@@ -35,14 +37,16 @@ const Filters = () => {
             selectedCategory === item.category
               ? "bg-primary-300"
               : "bg-primary-100 border border-primary-200"
-          }`}
+          }
+            
+          `}
         >
           <Text
             className={`text-sm ${
               selectedCategory === item.category
                 ? "text-white font-rubik-bold mt-0.5"
                 : "text-black-300 font-rubik"
-            }`}
+            } `}
           >
             {item.title}
           </Text>
