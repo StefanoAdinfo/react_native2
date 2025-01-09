@@ -8,6 +8,7 @@ import {
   View,
   Button,
 } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import { useEffect } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -60,15 +61,23 @@ export default function Index() {
   return (
     <SafeAreaView className="h-full bg-white">
       {/* <Button title="Seed" onPress={seed} /> */}
-      <FlatList
+      <FlashList
         data={properties}
-        renderItem={({ item }) => (
-          <Card onPress={() => handleCardPress(item.$id)} item={item} />
+        renderItem={({ item, index }) => (
+          <View
+            style={{
+              flex: 1,
+              margin: 5,
+            }}
+          >
+            <Card onPress={() => handleCardPress(item.$id)} item={item} />
+          </View>
         )}
         keyExtractor={(item) => item.$id}
         numColumns={2}
-        contentContainerClassName="pb-32"
-        columnWrapperClassName="flex gap-5 px-5"
+        contentContainerClassName="pb-32 "
+        estimatedItemSize={320} // Stima l'altezza media di ogni elemento
+        // columnWrapperClassName="flex gap-5 px-5"
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           loading ? (
@@ -114,15 +123,23 @@ export default function Index() {
               ) : !latestProperties || latestProperties.length === 0 ? (
                 <NoResults />
               ) : (
-                <FlatList
+                <FlashList
                   data={latestProperties}
-                  renderItem={({ item }) => (
-                    <FeaturedCard
-                      onPress={() => handleCardPress(item.$id)}
-                      item={item}
-                    />
+                  renderItem={({ item, index }) => (
+                    <View
+                      style={{
+                        flex: 1,
+                        margin: 5, // Aggiunge uno spazio tra gli elementi
+                      }}
+                    >
+                      <FeaturedCard
+                        onPress={() => handleCardPress(item.$id)}
+                        item={item}
+                      />
+                    </View>
                   )}
                   keyExtractor={(item) => item.$id}
+                  estimatedItemSize={150} // Stima l'altezza media di ogni elemento`
                   showsHorizontalScrollIndicator={false}
                   horizontal
                   //approfondire
