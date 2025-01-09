@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import { useEffect } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 
@@ -45,15 +46,15 @@ const Explore = () => {
   const handleCardPress = (id: string) => router.push(`/properties/${id}`);
   return (
     <SafeAreaView className="h-full bg-white">
-      <FlatList
+      <FlashList
         data={properties}
         numColumns={1}
         renderItem={({ item }) => (
-          <Card item={item} onPress={() => handleCardPress(item.$id)} />
+          <Card onPress={() => handleCardPress(item.$id)} item={item} />
         )}
+        estimatedItemSize={200} // Stima l'altezza media di ogni elemento
         keyExtractor={(item) => item.$id}
-        contentContainerClassName="pb-32 px-5"
-        // columnWrapperClassName="flex gap-5 px-5"
+        contentContainerStyle={{ paddingHorizontal: 10 }}
         showsVerticalScrollIndicator={true}
         ListEmptyComponent={
           loading ? (

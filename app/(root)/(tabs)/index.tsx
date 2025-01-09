@@ -75,7 +75,7 @@ export default function Index() {
         )}
         keyExtractor={(item) => item.$id}
         numColumns={2}
-        contentContainerClassName="pb-32 "
+        contentContainerClassName="pb-20"
         estimatedItemSize={320} // Stima l'altezza media di ogni elemento
         // columnWrapperClassName="flex gap-5 px-5"
         showsVerticalScrollIndicator={false}
@@ -87,28 +87,30 @@ export default function Index() {
           )
         }
         ListHeaderComponent={
-          <View className="px-5">
-            <View className="flex flex-row items-center justify-between mt-5">
-              <View className="flex flex-row">
-                <Image
-                  source={{ uri: user?.avatar }}
-                  className="size-12 rounded-full"
-                />
+          <View>
+            <View className="px-3">
+              <View className="flex flex-row items-center justify-between mt-5">
+                <View className="flex flex-row">
+                  <Image
+                    source={{ uri: user?.avatar }}
+                    className="size-12 rounded-full"
+                  />
 
-                <View className="flex flex-col items-start ml-2 justify-center">
-                  <Text className="text-xs font-rubik text-black-100">
-                    Good Morning
-                  </Text>
-                  <Text className="text-base font-rubik-medium text-black-300">
-                    {user?.name}
-                  </Text>
+                  <View className="flex flex-col items-start ml-2 justify-center">
+                    <Text className="text-xs font-rubik text-black-100">
+                      Good Morning
+                    </Text>
+                    <Text className="text-base font-rubik-medium text-black-300">
+                      {user?.name}
+                    </Text>
+                  </View>
                 </View>
+                <Image source={icons.bell} className="size-6" />
               </View>
-              <Image source={icons.bell} className="size-6" />
+              <Search />
             </View>
-            <Search />
             <View className="my-5">
-              <View className="flex flex-row items-center justify-between">
+              <View className="flex flex-row items-center justify-between px-3">
                 <Text className="text-xl font-rubik-bold text-black-300">
                   Featured
                 </Text>
@@ -144,12 +146,11 @@ export default function Index() {
                   horizontal
                   //approfondire
                   bounces={false}
-                  contentContainerClassName="flex gap-5 pt-5"
                 />
               )}
             </View>
 
-            <View className="mt-5">
+            <View className="mt-5 px-3">
               <View className="flex flex-row items-center justify-between">
                 <Text className="text-xl font-rubik-bold text-black-300">
                   Our Recommendation
@@ -160,8 +161,8 @@ export default function Index() {
                   </Text>
                 </TouchableOpacity>
               </View>
+              <Filters />
             </View>
-            <Filters />
           </View>
         }
       />
