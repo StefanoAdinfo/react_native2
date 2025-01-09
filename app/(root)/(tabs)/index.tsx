@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button,
 } from "react-native";
 import { useEffect } from "react";
 // import { router, useLocalSearchParams } from "expo-router";
@@ -20,6 +21,7 @@ import { Card, FeaturedCard } from "@/components/Cards";
 
 // import { useAppwrite } from "@/lib/useAppwrite";
 import { useGlobalContext } from "@/lib/global-provider";
+import seed from "@/lib/seed";
 // import { getLatestProperties, getProperties } from "@/lib/appwrite";
 
 export default function Index() {
@@ -27,6 +29,7 @@ export default function Index() {
 
   return (
     <SafeAreaView className="h-full bg-white">
+      <Button title="Seed" onPress={seed} />
       <FlatList
         data={[1, 2, 3, 4]}
         renderItem={({ item }) => <Card onPress={() => {}} />}
@@ -55,7 +58,6 @@ export default function Index() {
               </View>
               <Image source={icons.bell} className="size-6" />
             </View>
-
             <Search />
             <View className="my-5">
               <View className="flex flex-row items-center justify-between">
@@ -80,12 +82,6 @@ export default function Index() {
               />
             </View>
 
-            {/* <View className="flex flex-row gap-5 mt-5">
-              <FeaturedCard />
-              <FeaturedCard />
-              <FeaturedCard />
-            </View> */}
-
             <View className="mt-5">
               <View className="flex flex-row items-center justify-between">
                 <Text className="text-xl font-rubik-bold text-black-300">
@@ -99,10 +95,6 @@ export default function Index() {
               </View>
             </View>
             <Filters />
-            {/* <View className="flex flex-row  gap-5 mt-5">
-              <Card />
-              <Card />
-            </View> */}
           </View>
         }
       />
