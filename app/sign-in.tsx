@@ -30,10 +30,10 @@ const Auth = () => {
   };
 
   return (
-    <SafeAreaView className="bg-white h-full">
+    <SafeAreaView className="bg-white flex-1 ">
       <ScrollView
         contentContainerStyle={{
-          height: "100%",
+          flexGrow: 1,
         }}
       >
         <Image
@@ -58,9 +58,10 @@ const Auth = () => {
 
           <TouchableOpacity
             onPress={handleLogin}
-            className="bg-white shadow-md shadow-zinc-300 rounded-full w-full py-4 mt-5"
+            className="bg-white shadow-md shadow-zinc-300 rounded-full w-full py-4 mt-5
+            "
           >
-            <View className="flex flex-row items-center justify-center">
+            <View className="flex flex-row items-center justify-center ">
               <Image
                 source={icons.google}
                 className="w-5 h-5"
